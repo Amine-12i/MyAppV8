@@ -10,6 +10,8 @@ namespace MyApp.Service;
 
 public class CSVServices
 {
+
+   
     public async Task<List<StrangeAnimal>> LoadData()
     {
         List<StrangeAnimal> list = [];
@@ -18,35 +20,43 @@ public class CSVServices
         {
             PickerTitle = "Sélectionnez un fichier CSV"
         });
-
-        if (result != null)
+        try
         {
-            var lines = await File.ReadAllLinesAsync(result.FullPath, Encoding.UTF8);
-
-            var headers = lines[0].Split(';');
-            var properties = typeof(StrangeAnimal).GetProperties();
-
-            for (int i = 1; i < lines.Length; i++)
+            if (result != null)
             {
-                StrangeAnimal obj = new();
+                var lines = await File.ReadAllLinesAsync(result.FullPath, Encoding.UTF8);
 
-                var values = lines[i].Split(';');
+                var headers = lines[0].Split(';');
+                var properties = typeof(StrangeAnimal).GetProperties();
 
-                for (int j = 0; j < headers.Length; j++)
+                for (int i = 1; i < lines.Length; i++)
                 {
-                    var property = properties.FirstOrDefault(p => p.Name.Equals(headers[j], StringComparison.OrdinalIgnoreCase));
-                    
-                    if (property != null && j < values.Length)
-                    {
-                        object value = Convert.ChangeType(values[j], property.PropertyType);
-                        property.SetValue(obj, value);
-                    }
-                }
+                    StrangeAnimal obj = new();
 
-                list.Add(obj);
+                    var values = lines[i].Split(';');
+
+                    for (int j = 0; j < headers.Length; j++)
+                    {
+                        var property = properties.FirstOrDefault(p => p.Name.Equals(headers[j], StringComparison.OrdinalIgnoreCase));
+
+                        if (property != null && j < values.Length)
+                        {
+                            object value = Convert.ChangeType(values[j], property.PropertyType);
+                            property.SetValue(obj, value);
+                        }
+                    }
+
+                    list.Add(obj);
+                }
             }
+            return list;
         }
-        return list;
+        catch (Exception e)
+        {
+            Console.WriteLine("Erreur dans le chargement des données : " + e.Message);
+            return list;
+        }
+        
     }
     public async Task PrintData<T>(List<T> data)
     {

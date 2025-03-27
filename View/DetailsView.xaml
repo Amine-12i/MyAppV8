@@ -5,54 +5,68 @@
              xmlns:model="clr-namespace:MyApp.Model" 
              x:Class="MyApp.View.DetailsView"             
              x:DataType="viewmodel:DetailsViewModel"
-             Title="DetailsView">
-    
-    <VerticalStackLayout>
+             Title="DetailsView"
+             BackgroundColor="Black">
+
+    <VerticalStackLayout Spacing="20" Padding="20" BackgroundColor="DarkBlue">
         <HorizontalStackLayout Padding="10" Spacing="10">
-            <Label Text="Emulator : " VerticalOptions="Center"/>
-            <Switch OnColor="{StaticResource Primary}"
-                    ThumbColor="{StaticResource Primary}" 
+            <Label Text="Emulator : " VerticalOptions="Center" TextColor="Gold"/>
+            <Switch OnColor="Gold"
+                    ThumbColor="DarkRed" 
                     IsToggled="{Binding EmulatorON_OFF}"
-                    VerticalOptions="Center"/>            
+                    VerticalOptions="Center"/>
         </HorizontalStackLayout>
+
         <Grid ColumnDefinitions="0.1*,0.3*,*" RowDefinitions="*,*,*,*,*" Padding="20" RowSpacing="20">
-            <Label  Grid.Column="0" Grid.Row="0" Text="Id:" VerticalOptions="Center"/>
+            <Label  Grid.Column="0" Grid.Row="0" Text="Id:" VerticalOptions="Center" TextColor="Gold"/>
             <Entry  Grid.Column="1" Grid.Row="0"  
                     Text="{Binding Id}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" 
-                    WidthRequest="300"/>
-            <Label  Grid.Column="0" Grid.Row="1" Text="Nom:" VerticalOptions="Center"/>
+                    WidthRequest="300"
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"/>
+            <Label  Grid.Column="0" Grid.Row="1" Text="Nom:" VerticalOptions="Center" TextColor="Gold"/>
             <Entry  Grid.Column="1" Grid.Row="1"
                     Text="{Binding Name}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" 
-                    WidthRequest="300" />
-            <Label  Grid.Column="0" Grid.Row="2" Text="Description:" VerticalOptions="Center"/>
+                    WidthRequest="300" 
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"/>
+            <Label  Grid.Column="0" Grid.Row="2" Text="Description:" VerticalOptions="Center" TextColor="Gold"/>
             <Entry  Grid.Column="1" Grid.Row="2"
                     Text="{Binding Description}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" 
-                    WidthRequest="300" />
-            <Label  Grid.Column="0" Grid.Row="3" Text="Image:" VerticalOptions="Center"/>
+                    WidthRequest="300" 
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"/>
+            <Label  Grid.Column="0" Grid.Row="3" Text="Image:" VerticalOptions="Center" TextColor="Gold"/>
             <Entry  Grid.Column="1" Grid.Row="3" 
                     Text="{Binding Picture}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center" 
-                    WidthRequest="300" />
-            <Button x:Name="MyAnimatedButton"
-                    Grid.Column="1"
-                    Grid.Row="4"
-                    WidthRequest="100" 
-                    HorizontalOptions="Center"
-                    Text="Valider"
-                    Command="{Binding ChangeObjectParametersCommand}"
-                    Clicked="MyAnimatedButton_Clicked"
-                    IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BaseViewModel}}, Path= IsNotBusy}"/>
-            
+                    WidthRequest="300" 
+                    BackgroundColor="DarkSlateBlue"
+                    TextColor="White"/>
+
+            <Border Grid.Column="1" Grid.Row="4" Stroke="Gold" StrokeThickness="3" StrokeShape="RoundRectangle 10">
+                <Button x:Name="MyAnimatedButton"
+                        WidthRequest="100" 
+                        HorizontalOptions="Center"
+                        Text="Valider"
+                        BackgroundColor="DarkRed"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Command="{Binding ChangeObjectParametersCommand}"
+                        Clicked="MyAnimatedButton_Clicked"
+                        IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BaseViewModel}}, Path= IsNotBusy}"/>
+            </Border>
         </Grid>
+
         <HorizontalStackLayout Spacing="20">
-            <Label Text="Serial Data: "></Label>
+            <Label Text="Serial Data: " TextColor="White"></Label>
             <Label Text="{Binding SerialBufferContent}" TextColor="Red"></Label>
         </HorizontalStackLayout>
 

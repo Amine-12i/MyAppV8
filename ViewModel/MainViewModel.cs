@@ -12,7 +12,7 @@ namespace MyApp.ViewModel;
 
 public partial class MainViewModel : BaseViewModel
 {
-    public ObservableCollection<StrangeAnimal> MyObservableList { get; } = [];
+    public ObservableCollection <StrangeAnimal> MyObservableList { get; } = [];
     JSONServices MyJSONService;
     CSVServices MyCSVServices;
 
@@ -58,6 +58,7 @@ public partial class MainViewModel : BaseViewModel
         IsBusy = true;
 
         Globals.MyStrangeAnimals = await MyCSVServices.LoadData();
+        RefreshPage();
 
         IsBusy = false;
     }

@@ -1,1 +1,1 @@
-C:\Users\fredv\Desktop\GitFiles\MyApp\MyApp\MyApp.csproj;x64
+C:\Users\lucca\source\repos\MyAppV8\MyApp.csproj;x64
